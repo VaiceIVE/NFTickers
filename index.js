@@ -1,0 +1,11 @@
+var express = require('express');
+var cors = require('cors');
+var urlencoded = require('express').urlencoded;
+var PORT = process.env.PORT || 8000;
+var NFTRouter = require('./routers/NFTRouter');
+var app = express();
+app.use(cors());
+app.use(express.json());
+app.use(urlencoded(true));
+app.use(NFTRouter);
+app.listen(PORT, function () { console.log("Listening ".concat(PORT)); });
