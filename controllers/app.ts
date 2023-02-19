@@ -1,19 +1,18 @@
-const { Connection, Keypair} = require("@solana/web3.js");
+const { Connection, Keypair, LAMPORTS_PER_SOL} = require("@solana/web3.js");
 //import { Metaplex } from "@metaplex-foundation/js";
 import {PublicKey} from "@solana/web3.js";
 //import { Metaplex, keypairIdentity, bundlrStorage, toMetaplexFile, toBigNumber } from "@metaplex-foundation/js";
 const { Metaplex, keypairIdentity, bundlrStorage, toMetaplexFile, toBigNumber } = require("@metaplex-foundation/js");
 import * as fs from 'fs';
 
-var secret = [34,254,144,116,67,173,15,152,172,200,224,67,59,175,91,63,68,243,5,91,186,49,77,137,53,161,22,75,177,60,103,120,163,35,127,33,191,248,236,211,57,55,18,99,158,84,234,154,136,233,132,78,97,41,11,249,7,212,210,38,185,75,81,5]
-
+var secret = [226,71,202,60,188,226,108,152,37,93,239,252,169,148,169,253,118,177,130,107,138,66,102,188,41,59,228,42,4,25,209,193,200,109,105,255,218,28,114,49,68,212,49,61,229,119,247,252,188,183,138,5,81,112,228,102,144,21,74,54,36,213,209,23]
 
 
      async function main(filename:string, imgname:string, description: string) : Promise<any>{
 
         console.log("Main! name", filename)
 
-        const QUICKNODE_RPC = 'https://withered-clean-voice.solana-devnet.discover.quiknode.pro/3c362d98be083b209e4530d4878a65050b91bd36/';
+        const QUICKNODE_RPC = 'https://young-magical-rain.solana-devnet.discover.quiknode.pro/3c3d924ce6777997780c4837ce9f6006ab90db1b/';
         const SOLANA_CONNECTION = new Connection(QUICKNODE_RPC);
         const WALLET = Keypair.fromSecretKey(new Uint8Array(secret));
         const METAPLEX = Metaplex.make(SOLANA_CONNECTION)
@@ -95,9 +94,7 @@ async function mintNft(metadataUri: string, name: string, sellerFee: number, sym
     .create({
         uri: metadataUri,
         name: name,
-        sellerFeeBasisPoints: sellerFee,
         symbol: symbol,
-        creators: creators,
         isMutable: false,
         maxSupply: toBigNumber(1)}, 
         {commitment: "finalized"} );
@@ -105,6 +102,7 @@ async function mintNft(metadataUri: string, name: string, sellerFee: number, sym
     console.log(`   Minted NFT: https://explorer.solana.com/address/${nft.address}?cluster=devnet`);
     return nft.address;
 }
+
 
 
     module.exports = main;
